@@ -9,22 +9,18 @@ import com.example.demo.entities.Playlist;
 import com.example.demo.repository.PlaylistRepository;
 
 @Service
-public class PlaylistServiceImplementation
-            
-             implements PlaylistService
+public class PlaylistServiceImplementation 
+					implements PlaylistService
 {
-     @Autowired
+	@Autowired
 	PlaylistRepository repo;
 	@Override
 	public void addPlaylist(Playlist playlist) {
-		
 		repo.save(playlist);
 		
 	}
 	@Override
 	public List<Playlist> fetchAllPlaylists() {
-		
 		return repo.findAll();
 	}
-
 }

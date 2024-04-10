@@ -26,6 +26,21 @@ package com.example.demo.controller;
 			return "pay";
 		}
 
+		@GetMapping("/payment-success")
+		public String paymentSuccess(HttpSession session) {
+			String mail =  (String) session.getAttribute("email");
+			Users u = service.getUser(mail);
+			u.setPremium(true);
+			service.updateUser(u);
+			return "customerHome";
+		}
+		
+		@GetMapping("/payment-failure")
+		public String paymentFailure() {
+			return "customerHome";
+		}
+
+
 		@SuppressWarnings("finally")
 		@PostMapping("/createOrder")
 		@ResponseBody
@@ -46,7 +61,7 @@ package com.example.demo.controller;
 				String mail =  (String) session.getAttribute("email");
 
 				Users u = service.getUser(mail);
-				u.setPrenium(true);
+				u.setPremium(true);
 				service.updateUser(u);
 
 			} catch (RazorpayException e) {
